@@ -46,7 +46,6 @@ function InnerCanvas(props: {
           onEdgeClick={(_, edge)=>{ console.log('[WF-DEBUG] Edge click', edge?.id); if (edgeDeleteMode) { rf.setEdges((eds:any[])=> eds.filter((e:any)=> e.id !== edge.id)); return } rf.setEdges((eds:any[])=> eds.map((e:any)=> ({ ...e, selected: e.id === edge.id }))) }}
           onEdgeMouseEnter={()=>{ try { document.body.style.cursor='pointer' } catch {} }}
           onEdgeMouseLeave={()=>{ try { document.body.style.cursor='' } catch {} }}
-          dragHandle=".drag-area"
           onSelectionChange={({ nodes, edges }) => onSelectionChange?.({ nodeIds: nodes.map((n:any)=>n.id), edgeIds: edges.map((e:any)=>e.id) })}
           onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move' }}
           onDrop={(e) => {
@@ -75,8 +74,7 @@ function InnerCanvas(props: {
           zoomOnPinch
           snapToGrid
           snapGrid={[16,16]}
-          edgeOptions={{ style: { stroke: '#7dd3fc', cursor: 'pointer', pointerEvents: 'stroke' }, animated: true, selectable: true }}
-          defaultEdgeOptions={{ type: 'app', style: { stroke: '#7dd3fc', cursor: 'pointer', pointerEvents: 'stroke' }, animated: true, selectable: true }}
+          defaultEdgeOptions={{ type: 'app', style: { stroke: '#7dd3fc', cursor: 'pointer', pointerEvents: 'stroke' }, animated: true}}
         >
           <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#4b5563" />
           <MiniMap position="bottom-right" maskColor="rgba(11,15,26,0.6)" nodeColor={() => '#5a72ff'} nodeStrokeColor={() => '#cfd9ff'} />
