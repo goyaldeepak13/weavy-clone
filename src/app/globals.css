@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* React Flow + Workflow overrides */
+.react-flow__renderer, .react-flow__nodes { pointer-events: all !important; }
+.react-flow__node * { user-select: text !important; }
+/* Disable drag/pan/wheel on inputs & dropdowns within nodes */
+.nodrag { pointer-events: auto !important; user-select: text; }
+.nopan { pointer-events: auto !important; }
+.nowheel { pointer-events: auto !important; }
+
+/* Force node wrapper to allow pointer events - OVERRIDE ReactFlow defaults */
+.react-flow__node {
+  pointer-events: all !important;
+}
+
+.react-flow__node-wrapper {
+  pointer-events: all !important;
+}
+
+.react-flow__node.selected {
+  pointer-events: all !important;
+}
+
+.react-flow__node.draggable {
+  pointer-events: all !important;
+}
+
+/* Ensure interactive elements in nodes work - MUST override ReactFlow's pointer-events: none */
+.react-flow__node input,
+.react-flow__node textarea,
+.react-flow__node button,
+.react-flow__node label,
+.react-flow__node select,
+.react-flow__node [contenteditable="true"] {
+  pointer-events: all !important;
+  cursor: text !important;
+  opacity: 1 !important;
+  color: white !important;
+  z-index: 10 !important;
+  user-select: text !important;
+}
+
+.react-flow__node button {
+  cursor: pointer !important;
+  opacity: 1 !important;
+  z-index: 10 !important;
+}
+
+.react-flow__node textarea,
+.react-flow__node input[type="text"],
+.react-flow__node input[type="url"],
+.react-flow__node input[type="file"] {
+  cursor: text !important;
+  opacity: 1 !important;
+  color: white !important;
+  z-index: 10 !important;
+}
+.react-flow__node select {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.react-flow__node select:focus {
+  outline: none !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Style select options - note: limited browser support */
+.react-flow__node select option {
+  background-color: rgb(17, 24, 39) !important;
+  color: white !important;
+  padding: 8px !important;
+}
+
+/* For browsers that support styling the dropdown itself */
+.react-flow__node select:not([multiple]) {
+  color-scheme: dark !important;
+}
+
+.react-flow__panel.react-flow__attribution { display: none; }
+.react-flow__controls-button { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: #fff; }
+.react-flow__minimap { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+/* Sidebar collapsed width control for grid auto column */
+[data-state='closed'] { width: 56px !important; }
+
+/* Improve handle visibility */
+.react-flow__handle { box-shadow: 0 0 0 2px rgba(34,47,131,.35); }
+/* Selection */
+.react-flow__selection { border-color: rgba(127,148,255,.5) !important; background: rgba(127,148,255,.08) !important; }
+/* Edge selection */
+.react-flow__edge, .react-flow__edge .react-flow__edge-path { cursor: pointer !important; }
+/* Ensure edges can be clicked; use stroke picking for better hit area */
+.react-flow__edge path, .react-flow__edge .react-flow__edge-path { pointer-events: stroke !important; }
+.react-flow__edge.selected path, .react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 2px rgba(125,211,252,.8));
+}
+
+
+/* Animations */
+@keyframes glow {
+  0% { opacity: .7; }
+  50% { opacity: .9; }
+  100% { opacity: .7; }
+}
+@keyframes orb {
+  0% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-45%, -10px) scale(1.03); }
+  100% { transform: translate(-50%, 0) scale(1); }
+}
+@keyframes float {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+  100% { transform: translateY(0) }
+}
+.animate-glow { animation: glow 6s ease-in-out infinite; }
+.animate-orb { animation: orb 10s ease-in-out infinite; }
+.animate-float { animation: float 8s ease-in-out infinite; }
+.animate-float-slow { animation: float 12s ease-in-out infinite; }
+
+
+:root {
+  --radius: 12px;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+/* Smooth section spacing utility */
+.section {
+  @apply py-24 sm:py-28 md:py-32;
+}
+
+/* Scroll reveal baseline (to enhance later) */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
